@@ -1,19 +1,7 @@
-// Lets add a map() function to the Array Type.
-// Map accepts the projection function to be applied to each item in the source array, and returns 
-// the projected array.
+// Chain filter and map to collect the ids of videos that have a rating of 5.0
+// Chaining together map() and filter() gives us a lot of expressive power. These high level functions let us express what data we want, but leave the underlying libraries a great 
+// deal of flexibility in terms of how our queries are executed.
 
-// JSON.stringify([1,2,3].map(function(x){return x+1;})) === '[2,3,4]'
-
-Array.prototype.map = function (projectionFunction) {
-	var results= [];
-	this.forEach(function(itemArray){
-		results.push(projectionFunction(itemArray));
-	});
-
-	return results;
-}
-
-// use map() to project an array of videos into an array of (id,title) pairs
 function() {
 	var newReleases = [
 			{
@@ -21,7 +9,7 @@ function() {
 				"title": "Die Hard",
 				"boxart": "http://cdn-0.nflximg.com/images/2891/DieHard.jpg",
 				"uri": "http://api.netflix.com/catalog/titles/movies/70111470",
-				"rating": [4.0],
+				"rating": 4.0,
 				"bookmark": []
 			},
 			{
@@ -29,7 +17,7 @@ function() {
 				"title": "Bad Boys",
 				"boxart": "http://cdn-0.nflximg.com/images/2891/BadBoys.jpg",
 				"uri": "http://api.netflix.com/catalog/titles/movies/70111470",
-				"rating": [5.0],
+				"rating": 5.0,
 				"bookmark": [{ id:432534, time:65876586 }]
 			},
 			{
@@ -37,7 +25,7 @@ function() {
 				"title": "The Chamber",
 				"boxart": "http://cdn-0.nflximg.com/images/2891/TheChamber.jpg",
 				"uri": "http://api.netflix.com/catalog/titles/movies/70111470",
-				"rating": [4.0],
+				"rating": 4.0,
 				"bookmark": []
 			},
 			{
@@ -45,11 +33,22 @@ function() {
 				"title": "Fracture",
 				"boxart": "http://cdn-0.nflximg.com/images/2891/Fracture.jpg",
 				"uri": "http://api.netflix.com/catalog/titles/movies/70111470",
-				"rating": [5.0],
+				"rating": 5.0,
 				"bookmark": [{ id:432534, time:65876586 }]
 			}
 		];
 
-  return newReleases.map(function(video) { return {id: video.id, title: video.title}; });
+	// ------------   INSERT CODE HERE!  -----------------------------------
+	// Chain the filter and map functions to select the id of all videos
+	// with a rating of 5.0.
+
+	return newReleases.
+		filter(function(video) {
+			return video.rating === 5.0;
+		}).
+		map(function(video) {
+			return video.id;
+		});
+	// ------------   INSERT CODE HERE!  -----------------------------------
 }
 		
